@@ -1,26 +1,50 @@
 import { modules, students, mentors, classes } from "./hyf.js";
 
-/**
- * Tjebbe would like help to get a list of possible mentors for a module.
- * Fill in this function that finds all the mentors that can teach the given module.
- *
- * It should return an array of names. So something like:
- *  ['John', 'Mary']
- */
+/*
 const possibleMentorsForModule = (moduleName) => {
-  // TODO complete this function
-};
-// You can uncomment out this line to try your function
-// console.log(possibleMentorsForModule('using-apis'));
 
-/**
- * Tjebbe wants to make it even easier for himself.
- * Fill in this function that chooses a random mentor to teach the given module.
- *
- * It should return a single name.
- */
+
+  const teachers = [];
+  mentors.forEach((mentor) => {
+    if (mentor.canTeach.includes(moduleName)) {
+      teachers.push(mentor.name);
+    }
+  });
+  return teachers;
+};
+*/
+
+
+ //alternative solution
+const possibleMentorsForModule = (moduleName) =>
+  mentors
+    .filter(m => m.canTeach.includes(moduleName))
+    .map(m => m.name);
+
+
+// You can uncomment out this line to try your function
+console.log(possibleMentorsForModule('using-apis'));
+
 const findMentorForModule = (moduleName) => {
-  // TODO complete this function
+
+  const theChosen = mentors                                     // new array of names
+    .filter(m => m.canTeach.includes(moduleName))               // filtered by module
+  const index = Math.floor(Math.random() * theChosen.length);   // randon index
+  return theChosen[index].name;                                 // name with this index
+  
+ //alternative solution
+
+  /*const teachers = [];
+  mentors.forEach((mentor) => {
+    if (mentor.canTeach.includes(moduleName)) {
+      teachers.push(mentor.name);
+    }
+  });
+  const index = Math.floor(Math.random() * teachers.length);
+  const theChosen = teachers[index];
+
+  return theChosen;
+  */
 };
 // You can uncomment out this line to try your function
-// console.log(findMentorForModule('javascript'));
+  console.log(findMentorForModule('javascript'));
